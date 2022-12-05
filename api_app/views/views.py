@@ -23,8 +23,10 @@ from helpers.response import *
 #               validations
 from ..validations.auth_validate import *
 from ..validations.user_validate import *
+from ..validations.post_validate import *
 #               serializers
 from ..serializers.user_serializer import *
+from ..serializers.post_serializer import *
 #               paginations
 from ..paginations import *
 # =============== end include  ===============
