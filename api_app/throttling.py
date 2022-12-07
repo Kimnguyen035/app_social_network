@@ -8,7 +8,7 @@ class CustomThrottle(SimpleRateThrottle):
             return (None, None)
         num, period = rate.split(vr_sys.THROTTLING['split'])
         num_requests = int(num)
-        duration = {vr_sys.THROTTLING['per_time'][-1]: vr_sys.THROTTLING['per_time'][:-1]}[period[0]]
+        duration = {vr_sys.THROTTLING['per_time'][-1]: int(vr_sys.THROTTLING['per_time'][:-1])}[period[0]]
         return (num_requests, duration)
     
     def allow_request(self, request, view):
