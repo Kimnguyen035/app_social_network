@@ -8,12 +8,12 @@ from api_app import urls
 from django.urls import resolve
 
 class AuthUserMiddleware:
+    
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
         current_url = resolve(request.path_info).url_name
-        
         list_url = []
         for item in GROUP_URL:
             list_url += self.get_list_url(item)

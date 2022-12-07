@@ -22,6 +22,9 @@ ERROR = {
     'user_exists_deleted': {
         'Username or email':'Tai khoan da ton tai, hay doi trang thai tai khoan'
     },
+    'not_exists_post': 'Post is not exists.',
+    'deleted_post': 'Post is deleted',
+    
 }
 
 SUCCESS = {

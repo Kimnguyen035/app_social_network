@@ -30,3 +30,4 @@ from ..serializers.post_serializer import *
 #               paginations
 from ..paginations import *
 # =============== end include  ===============
+from ..throttling import *

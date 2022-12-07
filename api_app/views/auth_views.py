@@ -91,7 +91,7 @@ class AuthView(ViewSet):
     def create_token(self):
         token = {
             'datetime': str(datetime.now()),
-            'session': str(uuid.uuid1())
+            # 'session': str(uuid.uuid1())
         }
         access_token = self.jwt_encode(data=token, key=TOKEN['public_key'])
         refresh_token = self.jwt_encode(data=token, key=TOKEN['private_key'])

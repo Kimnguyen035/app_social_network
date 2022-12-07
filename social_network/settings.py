@@ -50,14 +50,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
-    # 'DEFAULT_THROTTLE_CLASSES': [
-    #     'rest_framework.throttling.AnonRateThrottle',
-    #     'rest_framework.throttling.UserRateThrottle'
-    # ],
-    # 'DEFAULT_THROTTLE_RATES': {
-    #     'anon': '100/day',
-    #     'user': '1/3second'
-    # }
+    'DEFAULT_THROTTLE_CLASSES': [
+        'api_app.throttling.UserThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '1/second',
+    },
+    'EXCEPTION_HANDLER': 'api_app.throttling.custom_exception_handler'
 }
 
 MIDDLEWARE = [
