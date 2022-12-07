@@ -1,8 +1,9 @@
-from rest_framework.throttling import UserRateThrottle,SimpleRateThrottle
+from rest_framework import throttling
 from configs import variable_system as vr_sys
 from helpers.response import *
+from rest_framework.views import exception_handler
 
-class CustomThrottle(SimpleRateThrottle):
+class CustomThrottle(throttling.SimpleRateThrottle):
     def parse_rate(self, rate):
         if rate is None:
             return (None, None)
@@ -17,8 +18,13 @@ class CustomThrottle(SimpleRateThrottle):
         return super().allow_request(request, view)
     
 def custom_exception_handler(exc, context):
-    return response_data(message=exc.detail)
+    response = exception_handler(exc, context)
+    if response is None:
+        return response
+    else:
+        response = exc.detail
+    return response_data(message=response)
     
-class UserThrottle(CustomThrottle, UserRateThrottle):
+class UserThrottle(CustomThrottle, throttling.UserRateThrottle):
     rate = vr_sys.THROTTLING['rate'] + vr_sys.THROTTLING['split'] + vr_sys.THROTTLING['per_time'][-1]
     

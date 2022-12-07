@@ -30,7 +30,7 @@ class AuthUserMiddleware:
         if token is None:
             return json_response(status=STATUS['TOKEN_EXPIRED'], message=ERROR['access_token'])
         
-        # redis_data = cache.get(token) 
+        # redis_data = cache.get(token)
         return self.get_response(request)
     
     def get_list_url(self, value):

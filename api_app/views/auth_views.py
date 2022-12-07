@@ -4,7 +4,7 @@ class AuthView(ViewSet):
     # ham dang nhap
     def login(self, request):
         data = request.data.copy()
-
+        
         # check input request
         validate = LoginValidate(data=data)
         if not validate.is_valid():
@@ -28,8 +28,16 @@ class AuthView(ViewSet):
         serializer = UserSerializer(user, many=True)
         redis_data = serializer.data[0]
         
+        
+        user_id = redis_data['id']
+        if user_id in cache:
+            val_a_token = cache.get(user_id)
+            val_r_token = cache.get(val_a_token)
+            keys = [user_id, val_a_token, val_r_token]
+            cache.delete_many(keys=keys)
+        
         # set data redis
-        self.set_token_redis(a_token=a_token, r_token=r_token, data=redis_data)
+        self.set_token_redis(a_token=a_token, r_token=r_token, data=redis_data, user_id=user_id)
         return response_data({
             'access_token': a_token,
             'refresh_token':r_token
@@ -67,7 +75,7 @@ class AuthView(ViewSet):
         self.set_token_redis(a_token=a_token, r_token=r_token, data=redis_data)
         return response_data({
             'access_token': a_token,
-            'refresh_token':r_token  
+            'refresh_token':r_token
         }, message=SUCCESS['refresh_token'])
         
     # ham dang xuat
@@ -104,10 +112,16 @@ class AuthView(ViewSet):
     def query_user_exists(self, username):
         return User.objects.filter(Q(username=username) | Q(email=username)).filter(deleted_at__isnull=True)
     
-    def set_token_redis(self, a_token, r_token, data):
+    def set_token_redis(self, a_token, r_token, data, user_id):
         data['token'] = a_token
+        cache.set(user_id, a_token, timeout=TOKEN['tls_access_token'])
         cache.set(a_token, r_token, timeout=TOKEN['tls_access_token'])
         cache.set(r_token, data, timeout=TOKEN['tls_refresh_token'])
+    
+    # def set_token_redis(self, a_token, r_token, data):
+    #     data['token'] = a_token
+    #     cache.set(a_token, r_token, timeout=TOKEN['tls_access_token'])
+    #     cache.set(r_token, data, timeout=TOKEN['tls_refresh_token'])
         
     def delete_token(self, a_token, r_token):
         cache.delete(a_token)
