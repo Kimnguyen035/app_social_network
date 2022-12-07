@@ -20,5 +20,5 @@ def custom_exception_handler(exc, context):
     return response_data(message=exc.detail)
     
 class UserThrottle(CustomThrottle, UserRateThrottle):
-    rate = vr_sys.THROTTLING['rate'] + vr_sys.THROTTLING['split'] + vr_sys.THROTTLING['per_time']
+    rate = vr_sys.THROTTLING['rate'] + vr_sys.THROTTLING['split'] + vr_sys.THROTTLING['per_time'][-1]
     
