@@ -8,7 +8,7 @@ class CustomThrottle(SimpleRateThrottle):
             return (None, None)
         num, period = rate.split(vr_sys.THROTTLING['split'])
         num_requests = int(num)
-        duration = {vr_sys.THROTTLING['type_time']: vr_sys.THROTTLING['waiting_time']}[period[0]]
+        duration = {vr_sys.THROTTLING['per_time'][-1]: vr_sys.THROTTLING['per_time'][:-1]}[period[0]]
         return (num_requests, duration)
     
     def allow_request(self, request, view):
@@ -20,5 +20,5 @@ def custom_exception_handler(exc, context):
     return response_data(message=exc.detail)
     
 class UserThrottle(CustomThrottle, UserRateThrottle):
-    rate = vr_sys.THROTTLING['rate'] + vr_sys.THROTTLING['split'] + vr_sys.THROTTLING['type_time']
+    rate = vr_sys.THROTTLING['rate'] + vr_sys.THROTTLING['split'] + vr_sys.THROTTLING['per_time']
     

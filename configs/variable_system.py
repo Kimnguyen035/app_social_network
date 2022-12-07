@@ -19,8 +19,7 @@ GROUP_URL = {
 THROTTLING = {
         'rate': '1',
         'split': '/',
-        'waiting_time': 3,
-        'type_time': 's',
+        'per_time': '3s',
         'method': [
             'GET'
         ],
