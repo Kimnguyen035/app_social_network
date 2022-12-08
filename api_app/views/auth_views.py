@@ -31,11 +31,11 @@ class AuthView(ViewSet):
         
         user_id = redis_data['id']
         if user_id in cache:
-            val_a_token = cache.get(user_id)
-            val_r_token = cache.get(val_a_token)
-            keys = [user_id, val_a_token, val_r_token]
+            val_r_token = cache.get(user_id)
+            val_a_token = cache.get(val_r_token)
+            keys = [val_a_token['token'], val_r_token, user_id]
             cache.delete_many(keys=keys)
-        
+            
         # set data redis
         self.set_token_redis(a_token=a_token, r_token=r_token, data=redis_data, user_id=user_id)
         return response_data({
@@ -64,9 +64,9 @@ class AuthView(ViewSet):
         redis_data = cache.get(data['refresh_token'])
         if redis_data is None:
             return response_data(status=STATUS['INPUT_INVALID'],message=ERROR['refresh_token'])
-        
+        user_id = cache.get(redis_data['id'])
         # xoa phien dang nhap cu
-        self.delete_token(redis_data['token'], data['refresh_token'])
+        self.delete_token(redis_data['token'], data['refresh_token'], user_id)
         
         # tao token
         a_token, r_token = self.create_token()
@@ -114,7 +114,7 @@ class AuthView(ViewSet):
     
     def set_token_redis(self, a_token, r_token, data, user_id):
         data['token'] = a_token
-        cache.set(user_id, a_token, timeout=TOKEN['tls_access_token'])
+        cache.set(user_id, r_token, timeout=TOKEN['tls_refresh_token'])
         cache.set(a_token, r_token, timeout=TOKEN['tls_access_token'])
         cache.set(r_token, data, timeout=TOKEN['tls_refresh_token'])
     
@@ -123,15 +123,31 @@ class AuthView(ViewSet):
     #     cache.set(a_token, r_token, timeout=TOKEN['tls_access_token'])
     #     cache.set(r_token, data, timeout=TOKEN['tls_refresh_token'])
         
-    def delete_token(self, a_token, r_token):
+    def delete_token(self, a_token, r_token, user_id):
+        cache.delete(user_id)
         cache.delete(a_token)
         cache.delete(r_token)
+        
+    # def delete_token(self, a_token, r_token):
+    #     cache.delete(a_token)
+    #     cache.delete(r_token)
     
     def get_data_token(self, request):
         data = request.headers.get("Authorization").replace(TOKEN['type'], '')
         a = cache.get(data)
         b = cache.get(a)
+        c = cache.get(b['id'])
         return response_data({
             'a':a,
-            'b':b
+            'b':b,
+            'c':c
         })
+    
+    # def get_data_token(self, request):
+    #     data = request.headers.get("Authorization").replace(TOKEN['type'], '')
+    #     a = cache.get(data)
+    #     b = cache.get(a)
+    #     return response_data({
+    #         'a':a,
+    #         'b':b
+    #     })
