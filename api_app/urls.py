@@ -23,10 +23,15 @@ all_url = {
     'url_post':[
         path('all-post', PostView.as_view({'get':'all_post'}), name='all_post'),
         path('detail-post/<int:id>', PostView.as_view({'get':'detail_post'}), name='detail_post'),
+        path('get-trash-post', PostView.as_view({'get':'get_trash'}), name='get_trash'),
+        
         path('post-blog', PostView.as_view({'post':'post_blog'}), name='post_blog'),
+        
         path('edit-post/<int:id>', PostView.as_view({'put':'edit_post'}), name='edit_post'),
+        
         path('delete-post/<int:id>', PostView.as_view({'delete':'delete_post'}), name='delete_post'),
-    ]
+        path('drop-post/<int:id>', PostView.as_view({'delete':'drop_post'}), name='drop_post'),
+    ],
 }   
 
 urlpatterns = []

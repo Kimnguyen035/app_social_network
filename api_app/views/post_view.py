@@ -21,13 +21,13 @@ class PostView(ViewSet):
             return response_data(data)
         return response_data(message=ERROR['not_exists_post'])
     
-    def post_blog(self, request):
-        data = request.data.copy()
-        data_save = PostSerializer(data=data)
-        if not data_save.is_valid():
-            return validate_error(message=data_save.errors)
-        data_save.save()
-        return response_data(data_save.data)
+    # def post_blog(self, request):
+    #     data = request.data.copy()
+    #     data_save = PostSerializer(data=data)
+    #     if not data_save.is_valid():
+    #         return validate_error(STATUS['FAIL_REQUEST'], data_save.errors)
+    #     data_save.save()
+    #     return response_data(message=SUCCESS['create_post'], data=data_save.data)
     
     def edit_post(self, request, id):
         data = request.data.copy()
@@ -39,7 +39,7 @@ class PostView(ViewSet):
         if not data_save.is_valid():
             return validate_error(message=data_save.errors)
         data_save.save()
-        return response_data(data_save.data)
+        return response_data(message=SUCCESS['update_post'], data=data_save.data)
     
     def delete_post(self, request, id):
         data = request.data.copy()
@@ -49,4 +49,17 @@ class PostView(ViewSet):
         delete_post = Post.objects.get(id=data_id['id'])
         delete_post.deleted_at = datetime.now()
         delete_post.save()
-        return response_data(message=ERROR['deleted_post'])
+        return response_data(message=SUCCESS['deleted_post'])
+    
+    def get_trash(self, request):
+        queryset = Post.objects.exclude(deleted_at__isnull=True)
+        serializer = PostSerializer(queryset, many=True)
+        return response_data(data=serializer.data)
+    
+    def drop_post(self, request, id):
+        data = request.GET.copy()
+        status, data_id = self.get_post_data(id)
+        if not status:
+            return response_data(message=ERROR['not_exists_post'],status=STATUS['NO_DATA'])
+        Post.objects.get(id=data_id['id']).delete()
+        return response_data(message=SUCCESS['drop_post'])
