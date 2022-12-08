@@ -5,3 +5,4 @@ mysqlclient
 PyJWT
 rsa
 bcrypt
+celery
