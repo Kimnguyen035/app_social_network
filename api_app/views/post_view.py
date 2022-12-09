@@ -1,4 +1,5 @@
 from .views import *
+from ..task import *
 
 class PostView(ViewSet):
     
@@ -21,13 +22,14 @@ class PostView(ViewSet):
             return response_data(data)
         return response_data(message=ERROR['not_exists_post'])
     
-    # def post_blog(self, request):
-    #     data = request.data.copy()
-    #     data_save = PostSerializer(data=data)
-    #     if not data_save.is_valid():
-    #         return validate_error(STATUS['FAIL_REQUEST'], data_save.errors)
-    #     data_save.save()
-    #     return response_data(message=SUCCESS['create_post'], data=data_save.data)
+    def post_blog(self, request):
+        data = request.data.copy()
+        post_save = PostSerializer(data=data)
+        if not post_save.is_valid():
+            return validate_error(post_save.errors)
+        # redis_db0 = caches['redis_db0']
+        # post_cache = redis_db0.set('queue', data, CELERY_QUEUE['redis_timeout'])
+        return response_data(message=SUCCESS['create_post'], data=post_save.data)
     
     def edit_post(self, request, id):
         data = request.data.copy()

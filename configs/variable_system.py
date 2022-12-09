@@ -24,3 +24,7 @@ THROTTLING = {
             'GET'
         ],
 }
+
+CELERY_QUEUE = {
+    'redis_timeout': 60*60
+}

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api_app'
+    'api_app',
+    'django_celery_results',
 ]
 
 REST_FRAMEWORK = {
@@ -106,7 +107,7 @@ CACHES = {
         'LOCATION': 'redis://127.0.0.1:6379/1'
         # redis://127.0.0.1:6379/0
     },
-    'redis_0': {
+    'redis_db0': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': 'redis://127.0.0.1:6379/0'
     }
@@ -158,9 +159,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = CACHES['redis_0']['LOCATION'] #'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = CACHES['redis_0']['LOCATION'] #'redis://localhost:6379/0'
+CELERY_BROKER_URL = CACHES['redis_db0']['LOCATION'] #'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = CACHES['redis_db0']['LOCATION'] #'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_ANNOTATIONS = {
+    '*': {
+        'max_retries': 3
+    }
+}
+# CELERY_BROKER_TRANSPORT_OPTIONS = {
+#     'visibility_timeout': 3600
+# }

@@ -6,3 +6,4 @@ PyJWT
 rsa
 bcrypt
 celery
+django-celery-results

@@ -30,7 +30,9 @@ def validate_error(data={}, status=STATUS['INPUT_INVALID']):
     # if data == {}:
     #     return response_data(status=STATUS['TOKEN_EXPIRED'], message='ERROR')
     data = dict(data)
+    print(data)
     error_message = ''
     for key, value in data.items():
-        error_message += str(key) + ' ' + str(list(value)[0]) + '<br/>'
+        error_message += str(key) + ' ' + str(list(value)[0])# + '<br/>'
+        break
     return response_data(status=status, message=error_message)

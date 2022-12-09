@@ -10,7 +10,7 @@ STATUS = {
 
 ERROR = {
     'wrong_password': 'Wrong password.',
-    'not_exists': ' is not exists.',
+    'not_exists': 'is not exists.',
     'exists': ' is exists',
     'refresh_token':'refresh_token is not exists.',
     'not_login':'Not logged in, token is null.',
