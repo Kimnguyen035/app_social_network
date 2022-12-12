@@ -165,11 +165,11 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
-CELERY_TASK_ANNOTATIONS = {
-    '*': {
-        'max_retries': 3
-    }
-}
-# CELERY_BROKER_TRANSPORT_OPTIONS = {
-#     'visibility_timeout': 3600
+# CELERY_TASK_ROUTES = {
+#     'api_app.tasks.create_blog': {'queue': 'post'},
+# }
+# CELERY_TASK_ANNOTATIONS = {
+#     '*': {
+#         'max_retries': 3
+#     }
 # }

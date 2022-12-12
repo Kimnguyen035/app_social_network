@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from ..models.post import Post
-from ..models.user import User
+# from ..models.user import User
 from .action_seralizer import ActionSerializer
 from configs.variable_response import *
 
@@ -29,11 +29,11 @@ class PostSerializer(serializers.ModelSerializer, ActionSerializer):
                 self.fields.pop(item)
     # ============================== end contructor ===========================
     
-    def validate_user_id(self, value):
-        queryset = User.objects.filter(id=value)
-        if not queryset.exists():
-            raise serializers.ValidationError(ERROR['not_exists'])
-        return value
+    # def validate_user_id(self, value):
+    #     queryset = User.objects.filter(id=value)
+    #     if not queryset.exists():
+    #         raise serializers.ValidationError(ERROR['not_exists'])
+    #     return value
     
     class Meta:
         model = Post

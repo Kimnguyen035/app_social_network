@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from ..models.post import Post
+from ..models.user import User
 from configs.variable_response import *
 from ..serializers.post_serializer import *
 
@@ -13,4 +14,15 @@ class IdGetPostValidate(serializers.Serializer):
         if not queryset.exists():
             raise serializers.ValidationError(ERROR['not_exists'])
         value['data'] = queryset.values()[0]
+        return value
+    
+class PostValueValidate(serializers.Serializer):
+    user_id = serializers.IntegerField()
+    title = serializers.CharField()
+    content = serializers.CharField()
+    
+    def validate_user_id(self, value):
+        queryset = User.objects.filter(id=value)
+        if not queryset.exists():
+            raise serializers.ValidationError(ERROR['not_exists'])
         return value

@@ -24,12 +24,10 @@ class PostView(ViewSet):
     
     def post_blog(self, request):
         data = request.data.copy()
-        post_save = PostSerializer(data=data)
+        post_save = PostValueValidate(data=data)
         if not post_save.is_valid():
-            return validate_error(post_save.errors)
-        add.delay(data)
-        # redis_db0 = caches['redis_db0']
-        # post_cache = redis_db0.set('queue', data, CELERY_QUEUE['redis_timeout'])
+            return validate_error(post_save.errors, status=STATUS['INPUT_INVALID'])
+        create_blog.delay(post_save.data)
         return response_data(message=SUCCESS['create_post'], data=post_save.data)
     
     def edit_post(self, request, id):
