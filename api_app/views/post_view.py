@@ -1,5 +1,5 @@
 from .views import *
-from ..task import *
+from ..tasks import *
 
 class PostView(ViewSet):
     
@@ -27,6 +27,7 @@ class PostView(ViewSet):
         post_save = PostSerializer(data=data)
         if not post_save.is_valid():
             return validate_error(post_save.errors)
+        add.delay(data)
         # redis_db0 = caches['redis_db0']
         # post_cache = redis_db0.set('queue', data, CELERY_QUEUE['redis_timeout'])
         return response_data(message=SUCCESS['create_post'], data=post_save.data)

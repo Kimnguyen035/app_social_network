@@ -13,8 +13,9 @@ from .serializers.post_serializer import *
     # retry_backoff_max=500,
     # retry_jitter=True
 # )
-@shared_task
+@shared_task(name='add')
 def add(value):
+    print('tui dang o day')
     post_save = PostSerializer(data=value)
     if not post_save.is_valid():
         return post_save.errors
