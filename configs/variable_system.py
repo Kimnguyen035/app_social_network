@@ -26,5 +26,8 @@ THROTTLING = {
 }
 
 CELERY_QUEUE = {
-    'redis_timeout': 60*60
+    'retry_task': {
+        'max_retries': 2,
+        'countdown': 5
+    }
 }

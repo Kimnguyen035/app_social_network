@@ -22,15 +22,17 @@ ERROR = {
     'user_exists_deleted': {
         'Username or email':'Tai khoan da ton tai, hay doi trang thai tai khoan'
     },
-    'not_exists_user': 'User is not exists',
-    'not_exists_post': 'Post is not exists.',
+    'not_exists_user': 'User does not exist',
+    'not_exists_post': 'Post does not exist.',
+    'not_exists_trash': 'The post does not exist in the trash.',
 }
 
 SUCCESS = {
     'login':'Login success.',
     'refresh_token':'Refresh success.',
-    'create_post':'Post is created',
-    'update_post':'Post is edited.',
-    'deleted_post': 'Post is deleted',
-    'drop_post': 'Post is dropped',
+    'create_post':'Post was created',
+    'update_post':'Post was edited.',
+    'deleted_post': 'Post was deleted',
+    'restore_post': 'Post was restored',
+    'drop_post': 'Post was dropped',
 }
