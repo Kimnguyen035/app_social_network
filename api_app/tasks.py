@@ -17,16 +17,6 @@ from helpers.response import *
     # retry_kwargs={'max_retries': 7, 'countdown': 5}
 # )
 
-# @shared_task
-# def error_handler(uuid):
-# 	result = celery_app.AsyncResult(uuid)
-# 	exc = result.get(propagate=False)
-# 	print('Task {0} raised exception: {1!r}\n{2!r}'.format(
-#         uuid,
-#         exc,
-#         result.traceback
-#     ))
-
 @shared_task(
     autoretry_for=(Exception,),
     retry_kwargs=CELERY_QUEUE['retry_task']
@@ -41,7 +31,3 @@ def create_blog(value):
         'message':SUCCESS['create_post'],
         'data':post_save.data
     }
-
-# @shared_task
-# def add(x, y):
-#     return x / y

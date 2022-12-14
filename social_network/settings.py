@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api_app',
     'django_celery_results',
+    'django_crontab',
 ]
 
 REST_FRAMEWORK = {
@@ -173,3 +174,15 @@ CELERY_TIMEZONE = TIME_ZONE
 #         'max_retries': 3
 #     }
 # }
+
+CRONJOBS = [
+    ('*/1 * * * *', 'api_app.cron_jobs.send_mail_pnc')
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.fpt.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'phuongnam.kimnt1@fpt.net'
+EMAIL_HOST_PASSWORD = 'K@12345abcd'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

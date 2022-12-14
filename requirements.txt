@@ -7,3 +7,4 @@ rsa
 bcrypt
 celery
 django-celery-results
+django-crontab

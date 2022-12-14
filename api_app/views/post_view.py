@@ -1,5 +1,6 @@
 from .views import *
 from ..tasks import *
+from django.core.mail import send_mail
 
 class PostView(ViewSet):
     
@@ -27,11 +28,9 @@ class PostView(ViewSet):
         post_save = PostValueValidate(data=data)
         if not post_save.is_valid():
             return validate_error(post_save.errors, STATUS['INPUT_INVALID'])
-        # create_blog.delay(post_save.data)
-        # create_blog.apply_async(kwargs={'value':post_save.data})
-        add.apply_async(('q','q'), link_error=error_handler.s())
+        create_blog.apply_async(kwargs={'value':post_save.data})
         return response_data(message=SUCCESS['create_post'], data=post_save.data)
-    
+
     def edit_post(self, request, id):
         data = request.data.copy()
         status, data_id = self.get_post_data(id)
