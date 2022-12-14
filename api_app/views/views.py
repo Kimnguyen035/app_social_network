@@ -30,5 +30,6 @@ from ..serializers.user_serializer import *
 from ..serializers.post_serializer import *
 #               paginations
 from ..paginations import *
+#               celery
+from ..tasks import *
 # =============== end include  ===============
-from ..throttling import *

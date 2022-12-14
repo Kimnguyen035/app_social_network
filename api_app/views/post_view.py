@@ -1,5 +1,4 @@
 from .views import *
-from ..tasks import *
 from django.core.mail import send_mail
 
 class PostView(ViewSet):
@@ -24,13 +23,23 @@ class PostView(ViewSet):
         return response_data(message=ERROR['not_exists_post'])
     
     def post_blog(self, request):
-        data = request.data.copy()
-        post_save = PostValueValidate(data=data)
-        if not post_save.is_valid():
-            return validate_error(post_save.errors, STATUS['INPUT_INVALID'])
-        create_blog.apply_async(kwargs={'value':post_save.data})
-        return response_data(message=SUCCESS['create_post'], data=post_save.data)
-
+        # data = request.data.copy()
+        # post_save = PostValueValidate(data=data)
+        # if not post_save.is_valid():
+        #     return validate_error(post_save.errors, STATUS['INPUT_INVALID'])
+        # create_blog.apply_async(kwargs={'value':post_save.data})
+        # return response_data(message=SUCCESS['create_post'], data=post_save.data)
+        send_mail(
+            subject = 'That\'s your subject',
+            message = 'That\'s your message body',
+            from_email = USER_SEND_MAIL['from'],
+            recipient_list = USER_SEND_MAIL['recipient_list'],
+            auth_user = USER_SEND_MAIL['from'],
+            auth_password = USER_SEND_MAIL['password_mail'],
+            fail_silently = USER_SEND_MAIL['fail_silently']
+        )
+        return response_data()
+        
     def edit_post(self, request, id):
         data = request.data.copy()
         status, data_id = self.get_post_data(id)

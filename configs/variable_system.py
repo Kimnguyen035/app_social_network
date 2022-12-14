@@ -31,3 +31,39 @@ CELERY_QUEUE = {
         'countdown': 5
     }
 }
+
+USER_SEND_MAIL = {
+    'from': 'phuongnam.kimnt1@fpt.net',
+    'password_mail': 'K@12345abcd',
+    'recipient_list': [
+        'kimnguyen035171@gmail.com'
+    ],
+    'fail_silently': False,
+    'connection': None,
+    'html_message': None
+}
+
+SMTP_EMAIL = {
+    'host': 'smtp.fpt.net',
+    'port': 587,
+    'host_user': 'phuongnam.kimnt1@fpt.net',
+    'host_passwor': 'K@12345abcd',
+    'use_tls': True,
+    'use_ssl': False
+}
+
+JOB_SEND_MAIL = {
+    'minute': '*/1',
+    'hour': '*',
+    'day': '*',
+    'month': '*',
+    'week': '*'
+}
+
+TIME_SEND_MAIL = ' '.join(JOB_SEND_MAIL.values())
+
+CRON_JOB = {
+    'cron_module': 'cron_jobs',
+    'func_job_send_mail': 'send_mail_pnc',
+    'scheduled_job_send_mail': TIME_SEND_MAIL
+}

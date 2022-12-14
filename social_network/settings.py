@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from datetime import timedelta
+from configs.variable_system import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -176,13 +176,13 @@ CELERY_TIMEZONE = TIME_ZONE
 # }
 
 CRONJOBS = [
-    ('*/1 * * * *', 'api_app.cron_jobs.send_mail_pnc')
+    (CRON_JOB['scheduled_job_send_mail'], 'api_app.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['func_job_send_mail'])
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.fpt.net'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'phuongnam.kimnt1@fpt.net'
-EMAIL_HOST_PASSWORD = 'K@12345abcd'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_HOST = SMTP_EMAIL['host'] #'smtp.fpt.net'
+EMAIL_PORT = SMTP_EMAIL['port'] #587
+EMAIL_HOST_USER = SMTP_EMAIL['host_user'] #'phuongnam.kimnt1@fpt.net'
+EMAIL_HOST_PASSWORD = SMTP_EMAIL['host_passwor'] #'K@12345abcd'
+EMAIL_USE_TLS = SMTP_EMAIL['use_tls'] #True
+EMAIL_USE_SSL = SMTP_EMAIL['use_ssl'] #False
