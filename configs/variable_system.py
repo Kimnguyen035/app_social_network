@@ -36,7 +36,8 @@ USER_SEND_MAIL = {
     'from': 'phuongnam.kimnt1@fpt.net',
     'password_mail': 'K@12345abcd',
     'recipient_list': [
-        'kimnguyen035171@gmail.com'
+        'kimnguyen035171@gmail.com',
+        # 'phuongnam.anph13@fpt.net'
     ],
     'fail_silently': False,
     'connection': None,
