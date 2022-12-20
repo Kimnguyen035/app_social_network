@@ -56,9 +56,9 @@ SMTP_EMAIL = {
 }
 
 JOB_SEND_MAIL = {
-    'minute': '0',
-    'hour': '0',
-    'day': '*/1',
+    'minute': '*/1',
+    'hour': '*',
+    'day': '*',
     'month': '*',
     'week': '*'
 }
