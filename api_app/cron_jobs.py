@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from configs.variable_system import *
 from configs.variable_send_mail import *
+from django.core.mail import EmailMessage
 
 def send_mail_pnc():
     send_mail(
@@ -12,3 +13,13 @@ def send_mail_pnc():
         auth_password = USER_SEND_MAIL['password_mail'],
         fail_silently = USER_SEND_MAIL['fail_silently']
     )
+    
+def send_email_message():
+    email = EmailMessage(
+            'Hello',
+            'Body goes here',
+            USER_SEND_MAIL['from'],
+            USER_SEND_MAIL['recipient_list'],
+    )
+    email.attach_file('/home/an/Downloads/CV-TESTER.pdf')
+    email.send()

@@ -31,12 +31,6 @@ all_url = {
         
         path('delete-post/<int:id>', PostView.as_view({'delete':'delete_post'}), name='delete_post'),
         path('drop-post/<int:id>', PostView.as_view({'delete':'drop_post'}), name='drop_post'),
-        
-        
-        
-        
-        
-        path('send-mail', PostView.as_view({'post':'send_mail'}), name='send_mail'),
     ],
 }   
 
