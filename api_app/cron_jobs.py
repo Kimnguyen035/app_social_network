@@ -17,7 +17,7 @@ def send_mail_pnc():
 def send_email_message():
     email = EmailMessage(
             'Hello',
-            'Body goes here',
+            'You have free time? Please take a look at this file.',
             USER_SEND_MAIL['from'],
             USER_SEND_MAIL['recipient_list'],
     )
