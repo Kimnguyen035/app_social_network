@@ -10,7 +10,7 @@ USER_SEND_MAIL = {
         # 'tranthanhnguyen0936@gmail.com',
         # 'dm2019.ttnguyen.3105@gmail.com',
         'kimnguyen035171@gmail.com',
-        'tgdd.ld9941@gmail.com',
+        # 'tgdd.ld9941@gmail.com',
         # 'anph13@fpt.com.vn',
     ],
     'fail_silently': False,
