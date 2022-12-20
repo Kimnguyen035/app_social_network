@@ -1,6 +1,7 @@
 from .views import *
 # from django.core.mail import send_mail
 from django.core.mail import EmailMessage
+from configs.variable_send_mail import *
 
 class PostView(ViewSet):
     

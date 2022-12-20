@@ -32,20 +32,6 @@ CELERY_QUEUE = {
     }
 }
 
-USER_SEND_MAIL = {
-    'from': 'phuongnam.kimnt1@fpt.net',
-    'password_mail': 'K@12345abcd',
-    'recipient_list': [
-        'tranthanhnguyen0936@gmail.com',
-        'dm2019.ttnguyen.3105@gmail.com',
-        'kimnguyen035171@gmail.com',
-        # 'anph13@fpt.com.vn'
-    ],
-    'fail_silently': False,
-    'connection': None,
-    'html_message': None
-}
-
 SMTP_EMAIL = {
     'host': 'smtp.fpt.net',
     'port': 587,
