@@ -176,7 +176,8 @@ CELERY_TIMEZONE = TIME_ZONE
 # }
 
 CRONJOBS = [
-    (CRON_JOB['scheduled_job_send_mail'], 'api_app.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['func_job_send_mail'])
+    # (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['send_mail']),
+    (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['email_message']),
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

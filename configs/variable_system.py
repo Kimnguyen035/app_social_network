@@ -52,7 +52,11 @@ JOB_SEND_MAIL = {
 TIME_SEND_MAIL = ' '.join(JOB_SEND_MAIL.values())
 
 CRON_JOB = {
+    'cron_app': 'api_app',
     'cron_module': 'cron_jobs',
-    'func_job_send_mail': 'send_mail_pnc',
+    'job_send_mail': {
+        'send_mail': 'send_mail_pnc',
+        'email_message': 'send_email_message'
+    },
     'scheduled_job_send_mail': TIME_SEND_MAIL
 }
