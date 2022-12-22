@@ -2,6 +2,7 @@ from django.urls import path
 from .views.auth_views import *
 from .views.user_views import *
 from .views.post_view import *
+from .views.mail_view import *
 
 all_url = {
     'url_auth':[
@@ -31,6 +32,12 @@ all_url = {
         
         path('delete-post/<int:id>', PostView.as_view({'delete':'delete_post'}), name='delete_post'),
         path('drop-post/<int:id>', PostView.as_view({'delete':'drop_post'}), name='drop_post'),
+    ],
+    'mail':[
+        path('all-mail', MailView.as_view({'get':'all_mail'}), name='all_mail'),
+        path('add-mail', MailView.as_view({'post':'add_mail'}), name='add_mail'),
+        path('edit-mail/<int:id>', MailView.as_view({'put':'edit_mail'}), name='edit_mail'),
+        path('send-mail/<int:id>', MailView.as_view({'put':'send_mail'}), name='send_mail'),
     ],
 }   
 

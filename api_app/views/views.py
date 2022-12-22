@@ -19,15 +19,18 @@ from datetime import datetime
 #               configs
 from configs.variable_response import *
 from configs.variable_system import *
+from configs.variable_send_mail import *
 #               helpers
 from helpers.response import *
 #               validations
 from ..validations.auth_validate import *
 from ..validations.user_validate import *
 from ..validations.post_validate import *
+from ..validations.mail_validate import *
 #               serializers
 from ..serializers.user_serializer import *
 from ..serializers.post_serializer import *
+from ..serializers.mail_serializer import *
 #               paginations
 from ..paginations import *
 #               celery

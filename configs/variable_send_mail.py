@@ -13,7 +13,7 @@ USER_SEND_MAIL = {
         # 'tgdd.ld9941@gmail.com',
         # 'anph13@fpt.com.vn',
     ],
-    'fail_silently': False,
+    'fail_silently': [True, False],
     'connection': None,
     'html_message': None
 }

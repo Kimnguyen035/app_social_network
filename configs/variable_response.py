@@ -25,6 +25,8 @@ ERROR = {
     'not_exists_user': 'User does not exist',
     'not_exists_post': 'Post does not exist.',
     'not_exists_trash': 'The post does not exist in the trash.',
+    'not_exists_mail': 'This mail does not exist.',
+    'send_mail_faild': 'Send mail failded.',
 }
 
 SUCCESS = {
@@ -35,4 +37,7 @@ SUCCESS = {
     'deleted_post': 'Post was deleted',
     'restore_post': 'Post was restored',
     'drop_post': 'Post was dropped',
+    'add_mail': 'Mail was saved',
+    'edit_mail': 'Mail was edited',
+    'send_mail': 'Mail was send',
 }
