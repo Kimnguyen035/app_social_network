@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api_app',
     'django_celery_results',
     'django_crontab',
+    'anymail',
 ]
 
 REST_FRAMEWORK = {
@@ -176,8 +177,9 @@ CELERY_TIMEZONE = TIME_ZONE
 # }
 
 CRONJOBS = [
-    (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['send_mail']),
-    (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['email_message']),
+    # (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['send_mail']),
+    # (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['email_message']),
+    (CRON_JOB['scheduled_job_send_mail'], 'api_app.cron_jobs.multi_mail'),
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
