@@ -38,6 +38,7 @@ all_url = {
         path('add-mail', MailView.as_view({'post':'add_mail'}), name='add_mail'),
         path('edit-mail/<int:id>', MailView.as_view({'put':'edit_mail'}), name='edit_mail'),
         path('send-mail/<int:id>', MailView.as_view({'put':'send_mail'}), name='send_mail'),
+        path('send', MailView.as_view({'post':'send'}), name='send'),
     ],
 }   
 
