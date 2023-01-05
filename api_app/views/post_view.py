@@ -16,10 +16,14 @@ class PostView(ViewSet):
         return True, validate.data['data']
     
     def detail_post(self, request, id):
-        status, data = self.get_post_data(id)
-        if status:
-            return response_data(data)
-        return response_data(message=ERROR['not_exists_post'])
+        validate = IdPostValidate(data={'id':id})
+        if not validate.is_valid():
+            return response_data(validate.errors)
+        detail_post = Post.objects.get(id=validate.data['id'])
+        if detail_post.deleted_at is not None:
+            return response_data(ERROR['not_exists_post'],STATUS['NO_DATA'])
+        serializer = PostSerializer(detail_post)
+        return response_data(message=ERROR['not_exists_post'],data=serializer.data)
     
     def post_blog(self, request):
         data = request.data.copy()
