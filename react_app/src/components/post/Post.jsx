@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import React, { useState, Component } from 'react'
 import './post.css'
 import { Users } from '../../dummyData'
+
+// import axios from "axios";
+
+// import { API_URL } from "../constants";
 
 const Post = ({post}) => {
     const [isLiked,setIsLiked] = useState(false)
