@@ -6,7 +6,7 @@ class PostView(ViewSet):
         queryset = Post.objects.filter(deleted_at__isnull=True)
         paginator = StandardPagination()
         pagination = paginator.paginate_queryset(queryset=queryset, request=request)
-        serializer = PostSerializer(pagination, many=True, fields=['id', 'title', 'content'])
+        serializer = PostSerializer(pagination, many=True, fields=['id', 'title', 'content', 'image_post'])
         return response_paginator(queryset.count(), paginator.page_size, serializer.data)
     
     def get_post_data(self, id):
