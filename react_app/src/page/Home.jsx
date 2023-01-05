@@ -1,6 +1,7 @@
 import './home.css';
 import Sidebar from '../components/sidebar/Sidebar'
 import Topbar from '../components/topbar/Topbar'
+import Feed from '../components/feed/Feed'
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
       <Topbar />
       <div className="homContainer">
         <Sidebar />
+        <Feed />
       </div>
     </>
   );

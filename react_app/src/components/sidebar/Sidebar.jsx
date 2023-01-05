@@ -1,5 +1,5 @@
 import './sidebar.css'
-// import { Users } from '../../dumData'
+// import { Users } from '../../dummyData'
 // import CloseFriend from '../closeFriend/CloseFriend'
 
 const Sidebar = () => {
