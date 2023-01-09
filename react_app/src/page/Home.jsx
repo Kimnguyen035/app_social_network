@@ -3,7 +3,7 @@ import Sidebar from '../components/sidebar/Sidebar'
 import Topbar from '../components/topbar/Topbar'
 import Feed from '../components/feed/Feed'
 
-function Home() {
+const Home = () => {
   return (
     <>
       <Topbar />
