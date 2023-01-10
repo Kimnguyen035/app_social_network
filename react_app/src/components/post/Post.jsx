@@ -1,27 +1,15 @@
-import React, { useState, Component } from 'react'
+import React from 'react'
+// , { useState, Component } from 'react'
 import './post.css'
-import { Users } from '../../dummyData'
 
-// import axios from "axios";
-
-// import { API_URL } from "../constants";
-
-const Post = ({ user_id,group_id,title,content,image_post }) => {
-    // const [isLiked, setIsLiked] = useState(false)
-    // const [like, setLike] = useState(post.like)
-    // const users = Users.filter(u => u.id === post.userId)
-
-    // const likehandler = () => {
-    //     setLike(isLiked ? like - 1 : like + 1)
-    //     setIsLiked(!isLiked)
-    // }
+const Post = ({id, user_id, group_id, title, content, image_post }) => {
 
     return (
         <div className='post'>
             <div className='postWrapper'>
                 <div className='postTop'>
                     <div className='postTopLeft'>
-                        <img src={image_post/*users[0].profilePicture*/} alt='' className='postProfileImg' />
+                        <img src={image_post} alt='' className='postProfileImg' />
                         <div className='text'>
                             <span className='postUsername'>a{/*users[0].username*/}</span>
                             <span className='postDate'>5 minutes ago</span>{/*post.date*/}
@@ -34,7 +22,7 @@ const Post = ({ user_id,group_id,title,content,image_post }) => {
                 </div>
                 <div className='postCenter'>
                     <span className='postText'>{title}{/*post.desc*/}</span>
-                    <img src={image_post/*post.photo*/} alt='' className='postImg' />
+                    <img src={image_post[0]} alt='' className='postImg' />
                 </div>
                 <div className='postBottom'>
                     <div className='postBottomLeft'>

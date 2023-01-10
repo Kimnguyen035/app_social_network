@@ -6,7 +6,7 @@ import getPostReducer from './reducers/post_reducer'
 
 
 const reducer = combineReducers({
-  getPosts: getPostReducer
+  post_list: getPostReducer
 });
 
 const middleware = [thunk];
@@ -16,4 +16,4 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middleware))
 );
 
-export default store;
+export {store};

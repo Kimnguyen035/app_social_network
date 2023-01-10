@@ -14,6 +14,7 @@ TOKEN = {
 
 GROUP_URL = {
     'url_auth',
+    'url_post',
 }
 
 THROTTLING = {

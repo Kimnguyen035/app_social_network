@@ -1,7 +1,7 @@
 import Share from '../share/Share'
 import Post from '../post/Post'
 import './feed.css'
-import { Posts } from '../../dummyData'
+// import { Posts } from '../../dummyData'
 import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,15 +11,15 @@ import { getPosts as listPost } from '../../redux/actions/post_action';
 const Feed = () => {
     const dispatch = useDispatch([]);
 
-    const getPosts = useSelector((state) => state.getPosts);
-    const { posts, loading, error } = getPosts;
-    console.log(posts)
-
     useEffect(() => {
         // const paramstring = querystring.stringify(filter);
         dispatch(listPost());
         // setPagination(filter);
-    }, [dispatch]);
+    }, []); // [dispatch,filter]
+
+    const list_post = useSelector((state) => state.post_list);
+    const { posts, loading, error } = list_post;
+    console.log(posts)
 
     return (
         <div className='feed'>
@@ -42,12 +42,13 @@ const Feed = () => {
                     ) : (
                         posts.map((post) => (
                             <Post
-                                key={post._id}
+                                key={post.id}
                                 title={post.title}
                                 content={post.content}
                                 image_post={post.image_post}
                                 user_id={post.user_id}
                                 group_id={post.group_id}
+                                id={post.id}
                                 // postId={post._id}
                             />
                         ))

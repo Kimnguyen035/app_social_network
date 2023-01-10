@@ -70,7 +70,9 @@ MIDDLEWARE = [
     'middleware.auth_user_middleware.AuthUserMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 ROOT_URLCONF = 'api_app.urls'
 

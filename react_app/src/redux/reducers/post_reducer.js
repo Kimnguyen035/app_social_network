@@ -1,6 +1,12 @@
-import * as actionTypes from "../constants/post_constant";
+import * as actionTypes from '../constants/post_constant';
 
-export const getPostReducer = (state = { posts: [] }, action) => {
+const initialState = {
+  posts:[],
+  loading:false,
+  errorMessage:''
+}    
+
+const getPostReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_POST_REQUEST:
       return {
@@ -14,10 +20,12 @@ export const getPostReducer = (state = { posts: [] }, action) => {
       };
     case actionTypes.GET_POST_FAIL:
       return {
-        loading: false,
+        loading: false, 
         error: action.payload,
-      };
+      };  
     default:
       return state;
   }
 };
+
+export default getPostReducer;

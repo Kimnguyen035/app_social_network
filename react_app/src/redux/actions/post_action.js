@@ -1,5 +1,5 @@
-import * as actionTypes from "../constants/post_constant";
-import axios from "axios";
+import * as actionTypes from '../constants/post_constant';
+import axios from 'axios';
 
 export const getPosts = () => async (dispatch) => {//paramstring
     try {
@@ -9,16 +9,16 @@ export const getPosts = () => async (dispatch) => {//paramstring
 
         dispatch({
             type: actionTypes.GET_POST_SUCCESS,
-            payload: data,
+            payload: data.data.list_data,
         });
     }
     catch (error) {
         dispatch({
             type: actionTypes.GET_POST_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: error
+                // error.response && error.response.data.message
+                //     ? error.response.data.message
+                //     : error.message,
         });
     }
 };
