@@ -1,8 +1,7 @@
 import Share from '../share/Share'
 import Post from '../post/Post'
 import './feed.css'
-// import { Posts } from '../../dummyData'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import BeatLoader from 'react-spinners/BeatLoader';

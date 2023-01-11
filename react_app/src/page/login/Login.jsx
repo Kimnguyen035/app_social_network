@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import './login.css'
+import {login} from '../../redux/actions/login_action'
 
 export default function Login() {
+  const dispatch = useDispatch();
+
+  const [username, setUsername] = useState('');
+  const [password, setPassWord] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login({username, password}));
+  }
   return (
     <div className='login'>
       <div className='loginWrapper'>
@@ -13,8 +24,9 @@ export default function Login() {
         </div>
         <div className='loginRight'>
             <div className='loginBox'>
-                <input placeholder='Username' className='loginInput' />
-                <input placeholder='Password' className='loginInput' />
+                <input placeholder='Username' id='username' className='loginInput' />
+                <input placeholder='Password' type='password' id='password' className='loginInput' />
+                <span class="material-icons">visibility</span>
                 <button className='loginButton'>Log In</button>
                 <span className='loginForgot'>Forgot Password?</span>
                 <button className='loginRgisterButton'>
