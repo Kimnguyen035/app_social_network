@@ -4,8 +4,9 @@ import axios from 'axios';
 export const getPosts = () => async (dispatch) => {//paramstring
     try {
         dispatch({ type: actionTypes.GET_POST_REQUEST });
+        var url = `${process.env.REACT_APP_API_URL}`;
 
-        const { data } = await axios.get(`http://127.0.0.1:8000/all-post`);//?${paramstring}
+        const { data } = await axios.get(url + 'all-post');//?${paramstring}
 
         dispatch({
             type: actionTypes.GET_POST_SUCCESS,
