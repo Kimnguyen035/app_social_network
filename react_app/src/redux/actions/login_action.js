@@ -11,12 +11,13 @@ export const login = (user) => async (dispatch) => {
       const url = `${process.env.REACT_APP_API_URL}`;
   
       const { data } = await axios.post(url + 'login', user);
-      console.log(data)
       
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,
         payload: data
       });
+
+      localStorage.setItem("tokens", JSON.stringify(data.data));
     } catch (error) {
       dispatch({
         type: actionTypes.LOGIN_FAIL,

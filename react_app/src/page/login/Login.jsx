@@ -6,13 +6,17 @@ import {login} from '../../redux/actions/login_action'
 export default function Login() {
   const dispatch = useDispatch();
 
-  const [username, setUsername] = useState('');
-  const [password, setPassWord] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassWord] = useState('')
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login({username, password}));
+    e.preventDefault()
+    dispatch(login({username, password}))
+    
+    // console.log(u)
+    // history.push(`/cart`);
   }
+
   return (
     <div className='login'>
       <div className='loginWrapper'>
@@ -24,14 +28,14 @@ export default function Login() {
         </div>
         <div className='loginRight'>
             <div className='loginBox'>
-                <input placeholder='Username' id='username' className='loginInput' />
-                <input placeholder='Password' type='password' id='password' className='loginInput' />
+                <input className='loginInput' placeholder='Username' onChange={(e) => setUsername(e.target.value)} />
+                <input className='loginInput' placeholder='Password' type='password' onChange={(e) => setPassWord(e.target.value)} />
                 <span class="material-icons">visibility</span>
-                <button className='loginButton'>Log In</button>
+                <button className='loginButton' onClick={handleSubmit}>Log In</button>
                 <span className='loginForgot'>Forgot Password?</span>
                 <button className='loginRgisterButton'>
                     Create a new Account
-                </button>
+                </button> 
             </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import * as actionTypes from "../constants/login_constant";
 
-export const loginRedecer = (state = {}, action) => {
+const loginReducer = (state = {}, action) => {
     switch (action.type) {
       case actionTypes.LOGIN_REQUEST:
         return {
@@ -19,3 +19,5 @@ export const loginRedecer = (state = {}, action) => {
       default: return state;
     }
   }
+
+  export default loginReducer

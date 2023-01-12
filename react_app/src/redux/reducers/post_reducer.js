@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/post_constant';
+import * as actionTypes from '../constants/post_constant'
 
 const initialState = {
   posts:[],
@@ -28,4 +28,4 @@ const getPostReducer = (state = initialState, action) => {
   }
 };
 
-export default getPostReducer;
+export default getPostReducer
