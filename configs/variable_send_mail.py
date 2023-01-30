@@ -7,12 +7,8 @@ USER_SEND_MAIL = {
     'from': 'phuongnam.kimnt1@fpt.net',
     'password_mail': 'K@12345abcd',
     'recipient_list': [
-        # 'tranthanhnguyen0936@gmail.com',
-        # 'dm2019.ttnguyen.3105@gmail.com',
         'kimnguyen035171@gmail.com',
         'kimnt7@fpt.com.vn',
-        # 'tgdd.ld9941@gmail.com',
-        # 'anph13@fpt.com.vn',
     ],
     'fail_silently': [True, False],
     'connection': None,
