@@ -26,8 +26,4 @@ def create_blog(value):
     if not post_save.is_valid():
         return post_save.errors
     post_save.save()
-    return {
-        'status':STATUS['SUCCESS'],
-        'message':SUCCESS['create_post'],
-        'data':post_save.data
-    }
+    return 'success'
