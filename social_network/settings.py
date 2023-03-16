@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from configs.variable_system import *
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_celery_beat',
     # 'corsheaders',
     'api_app',
     'django_celery_results',
-    'django_crontab',
+    # 'django_crontab',
     # 'anymail',
 ]
 
@@ -183,16 +185,23 @@ CELERY_TIMEZONE = TIME_ZONE
 #     }
 # }
 
-CRONJOBS = [
+CELERY_BEAT_SCHEDULE = { # scheduler configuration 
+    'Task_one_schedule' : {  # whatever the name you want 
+        'task': 'api_app.tasks.create_blog', # name of task with path
+        'schedule': crontab(), # crontab() runs the tasks every minute
+    }
+}
+
+# CRONJOBS = [
     # (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['send_mail']),
     # (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['email_message']),
-    (CRON_JOB['scheduled_job_send_mail'], 'api_app.cron_jobs.multi_mail'),
-]
+    # (CRON_JOB['scheduled_job_send_mail'], 'api_app.cron_jobs.multi_mail'),
+# ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = SMTP_EMAIL['host'] #'smtp.fpt.net'
 EMAIL_PORT = SMTP_EMAIL['port'] #587
 EMAIL_HOST_USER = SMTP_EMAIL['host_user'] #'phuongnam.kimnt1@fpt.net'
 EMAIL_HOST_PASSWORD = SMTP_EMAIL['host_passwor'] #'K@12345abcd'
-EMAIL_USE_TLS = SMTP_EMAIL['use_tls'] #True
-EMAIL_USE_SSL = SMTP_EMAIL['use_ssl'] #False
+EMAIL_USE_TLS = SMTP_EMAIL['use_tls'] #True or False
+EMAIL_USE_SSL = SMTP_EMAIL['use_ssl'] #True or False

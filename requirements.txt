@@ -6,5 +6,6 @@ PyJWT
 rsa
 bcrypt
 celery
+django-celery-beat
 django-celery-results
 django-crontab
