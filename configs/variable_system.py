@@ -29,7 +29,7 @@ THROTTLING = {
 CELERY_QUEUE = {
     'retry_task': {
         'max_retries': 2,
-        'countdown': 5
+        'countdown': 3
     }
 }
 

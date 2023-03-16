@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders',
+    # 'corsheaders',
     'api_app',
     'django_celery_results',
     'django_crontab',
-    'anymail',
+    # 'anymail',
 ]
 
 REST_FRAMEWORK = {
@@ -70,9 +70,9 @@ MIDDLEWARE = [
     'middleware.auth_user_middleware.AuthUserMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+# ]
 
 ROOT_URLCONF = 'api_app.urls'
 
@@ -101,9 +101,9 @@ WSGI_APPLICATION = 'social_network.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'social_network',
-        'USER': 'root',
-        'PASSWORD': '0000',
+        'NAME': 'social_network', #'mypt',
+        'USER': 'admin', #'root',
+        'PASSWORD': '123456', #'0000',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -174,7 +174,8 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 # CELERY_TASK_ROUTES = {
-#     'api_app.tasks.create_blog': {'queue': 'post'},
+    # 'api_app.tasks.create_blog': {'queue': 'alobolobola'},
+    # 'api_app.tasks.*': {'queue': 'alobolobola'},
 # }
 # CELERY_TASK_ANNOTATIONS = {
 #     '*': {
