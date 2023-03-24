@@ -32,6 +32,8 @@ all_url = {
         
         path('delete-post/<int:id>', PostView.as_view({'delete':'delete_post'}), name='delete_post'),
         path('drop-post/<int:id>', PostView.as_view({'delete':'drop_post'}), name='drop_post'),
+        
+        path('test', PostView.as_view({'post':'test'}), name='test'),
     ],
     'mail':[
         path('all-mail', MailView.as_view({'get':'all_mail'}), name='all_mail'),

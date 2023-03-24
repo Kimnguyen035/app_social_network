@@ -1,6 +1,13 @@
 from .views import *
 
 class PostView(ViewSet):
+    def test(self, request):
+        data = request.data.copy()
+        # result = add.apply_async(args=[data['a'], data['b']], expires=(10))
+        result = add.apply_async(args=[data['a'], data['b']])
+        result.wait()
+        # print(result.status)
+        return response_data(result.result)
     
     def all_post(self, request):
         queryset = Post.objects.filter(deleted_at__isnull=True)

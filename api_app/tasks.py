@@ -5,6 +5,9 @@ from .serializers.post_serializer import *
 from configs.variable_response import *
 from helpers.response import *
 
+from celery.result import AsyncResult
+from datetime import datetime, timedelta
+
 # @shared_task(
     # name='add',
     # bind=True,
@@ -27,3 +30,11 @@ def create_blog(value):
         return post_save.errors
     post_save.save()
     return 'success'
+
+@shared_task(
+    autoretry_for=(Exception,),
+    retry_kwargs=CELERY_QUEUE['retry_task']
+)
+def add(a, b):
+    x = a + b
+    return 'x = ' + str(x)

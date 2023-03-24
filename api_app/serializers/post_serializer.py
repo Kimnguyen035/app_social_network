@@ -8,11 +8,11 @@ from .iamge_serializer import *
 class PostSerializer(serializers.ModelSerializer, ActionSerializer):
     user_id = serializers.IntegerField(allow_null = True)
     group_id = serializers.IntegerField(allow_null=True, required=False)
-    image_post = serializers.SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field='src_image'
-    )
+    # image_post = serializers.SlugRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     slug_field='src_image'
+    # )
     # image_post = ImgSerializer(many=True,read_only=True)
     # image_post = serializers.StringRelatedField(many=True)
     
@@ -44,4 +44,11 @@ class PostSerializer(serializers.ModelSerializer, ActionSerializer):
     
     class Meta:
         model = Post
-        fields = ['id','user_id','group_id','title','content','image_post','created_at','updated_at','deleted_at']
+        fields = [
+            'id',
+            'user_id',
+            'group_id',
+            'title',
+            'content',
+            # 'image_post',
+            'created_at','updated_at','deleted_at']

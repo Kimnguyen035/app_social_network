@@ -47,14 +47,37 @@ INSTALLED_APPS = [
     # 'anymail',
 ]
 
+DATE_FORMAT = '%d-%m-%Y'
+
+DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'
+
+DATE_INPUT_FORMATS = [
+    '%d/%m/%Y',
+    '%Y-%m-%d',
+    '%d-%m-%Y',
+    '%Y/%m/%d'
+]
+
+DATETIME_INPUT_FORMATS = [
+    '%Y-%m-%d %H:%M:%S',
+    '%Y/%m/%d %H:%M:%S',
+    '%d-%m-%Y %H:%M:%S',
+    '%d/%m/%Y %H:%M:%S'
+]
+
 REST_FRAMEWORK = {
-    'DATE_INPUT_FORMATS': ['%d/%m/%Y', '%Y-%m-%d', '%d-%m-%Y', '%Y/%m/%d'],
-    'DATETIME_INPUT_FORMATS': ['%Y-%m-%d %H:%M:%S', '%Y/%m/%d %H:%M:%S', '%d-%m-%Y %H:%M:%S', "%d/%m/%Y %H:%M:%S"],
+    'DATE_FORMAT': DATE_FORMAT,
+    'DATETIME_FORMAT': DATETIME_FORMAT,
+    'DATE_INPUT_FORMATS': DATE_INPUT_FORMATS,
+    'DATETIME_INPUT_FORMATS': DATETIME_INPUT_FORMATS,
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FormParser'
     ],
     'DEFAULT_THROTTLE_CLASSES': [
         'api_app.throttling.UserThrottle',
@@ -115,7 +138,6 @@ CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': 'redis://127.0.0.1:6379/1'
-        # redis://127.0.0.1:6379/0
     },
     'redis_db0': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -176,8 +198,8 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 # CELERY_TASK_ROUTES = {
-    # 'api_app.tasks.create_blog': {'queue': 'alobolobola'},
-    # 'api_app.tasks.*': {'queue': 'alobolobola'},
+#     'api_app.tasks.create_blog': {'queue': 'alobolobola'},
+#     'api_app.tasks.*': {'queue': 'alobolobola'},
 # }
 # CELERY_TASK_ANNOTATIONS = {
 #     '*': {
@@ -185,18 +207,18 @@ CELERY_TIMEZONE = TIME_ZONE
 #     }
 # }
 
-CELERY_BEAT_SCHEDULE = { # scheduler configuration 
-    'Task_one_schedule' : {  # whatever the name you want 
-        'task': 'api_app.tasks.create_blog', # name of task with path
-        'schedule': crontab(), # crontab() runs the tasks every minute
-    }
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'Task_one_schedule' : {
+#         'task': 'api_app.tasks.create_blog',
+#         'schedule': crontab(),
+#     }
+# }
 
-# CRONJOBS = [
-    # (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['send_mail']),
-    # (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['email_message']),
-    # (CRON_JOB['scheduled_job_send_mail'], 'api_app.cron_jobs.multi_mail'),
-# ]
+CRONJOBS = [
+    (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['send_mail']),
+    (CRON_JOB['scheduled_job_send_mail'], CRON_JOB['cron_app'] + '.' + CRON_JOB['cron_module'] + '.' + CRON_JOB['job_send_mail']['email_message']),
+    (CRON_JOB['scheduled_job_send_mail'], 'api_app.cron_jobs.multi_mail'),
+]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = SMTP_EMAIL['host'] #'smtp.fpt.net'
