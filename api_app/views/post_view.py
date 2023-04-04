@@ -5,7 +5,7 @@ class PostView(ViewSet):
         data = request.data.copy()
         # result = add.apply_async(args=[data['a'], data['b']], expires=(10))
         result = add.apply_async(args=[data['a'], data['b']])
-        result.wait()
+        # result.wait()
         # print(result.status)
         return response_data(result.result)
     

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django_celery_beat',
     # 'corsheaders',
     'api_app',
-    'django_celery_results',
+    # 'django_celery_results',
+    'celery'
     # 'django_crontab',
     # 'anymail',
 ]
@@ -208,10 +209,11 @@ CELERY_TIMEZONE = TIME_ZONE
 # }
 
 # CELERY_BEAT_SCHEDULE = {
-#     'Task_one_schedule' : {
-#         'task': 'api_app.tasks.create_blog',
-#         'schedule': crontab(),
-#     }
+#     'Task_one_schedule': {
+#         'task': 'api_app.tasks.add',
+#         'schedule': crontab(hour=10, minute=0),
+#         'args': (16, 16)
+#     },
 # }
 
 CRONJOBS = [

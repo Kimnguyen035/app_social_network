@@ -1,7 +1,7 @@
 import os
 from celery import Celery
 # from celery.schedules import crontab
-from kombu import Exchange, Queue
+# from kombu import Exchange, Queue
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'social_network.settings')
 
@@ -24,8 +24,9 @@ celery_app.autodiscover_tasks()
 
 # celery_app.conf.beat_schedule = {
 #     'Task_one_schedule' : {
-#         'task': 'api_app.tasks.create_blog',
-#         'schedule': crontab(),
-#         'kwargs': {}
+#         'task': 'api_app.tasks.add',
+#         'schedule': crontab(hour=16, minute=45),
+#         # 'kwargs': {},
+#         'args': (16, 16)
 #     }
 # }
